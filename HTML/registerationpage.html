@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #a18cd1, #6ab7ff, #fbc2eb);
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+            padding: 30px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 950px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(15px);
+            padding: 35px;
+            border-radius: 25px;
+            width: 400px;
+            box-shadow: 0 15px 40px rgba(30,30,100,0.2);
+            animation: appear 1s ease;
+            transition: transform 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #24205f;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #7139e8;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            margin: 9px 0;
+            border: 1px solid #d6d4f0;
+            border-radius: 12px;
+            outline: none;
+            background: #fff;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #773bea;
+            box-shadow: 0 0 10px rgba(119,59,234,0.25);
+            transform: scale(1.02);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #a044ff, #5e2bdb);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(94,43,219,0.35);
+        }
+
+        .register-btn {
+            background: linear-gradient(90deg, #2196f3, #174be8);
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        a {
+            color: #642de2;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        @media(max-width: 850px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN CARD -->
+
+    <div class="card" id="login">
+
+        <div class="icon">🎓</div>
+
+        <h1>Student <span>Login</span></h1>
+
+        <p class="subtitle">Welcome Back!</p>
+
+        <form onsubmit="loginUser(event)">
+
+            <input type="text"
+                   placeholder="Enter Username"
+                   required>
+
+            <input type="password"
+                   placeholder="Enter Password"
+                   required>
+
+            <button type="submit">Login →</button>
+
+        </form>
+
+        <p class="bottom-text">
+            New Student?
+            <a href="#register">Register Here</a>
+        </p>
+
+    </div>
+
+
+    <!-- REGISTRATION CARD -->
+
+    <div class="card" id="register">
+
+        <div class="icon">📝</div>
+
+        <h1>Student <span>Registration</span></h1>
+
+        <p class="subtitle">Create Your Account</p>
+
+        <form onsubmit="registerUser(event)">
+
+            <input type="text"
+                   placeholder="Enter Full Name"
+                   required>
+
+            <input type="tel"
+                   placeholder="Enter Phone Number"
+                   pattern="[0-9]{10}"
+                   title="Enter a 10-digit phone number"
+                   required>
+
+            <input type="number"
+                   placeholder="Enter Age"
+                   min="1"
+                   max="120"
+                   required>
+
+            <select required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <input type="email"
+                   placeholder="Enter Email Address"
+                   required>
+
+            <input type="password"
+                   id="password"
+                   placeholder="Create Password"
+                   minlength="6"
+                   required>
+
+            <input type="password"
+                   id="confirmPassword"
+                   placeholder="Re-enter Password"
+                   required>
+
+            <button type="submit" class="register-btn">
+                Register →
+            </button>
+
+        </form>
+
+        <p class="bottom-text">
+            Already Registered?
+            <a href="#login">Login Here</a>
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function registerUser(event) {
+
+        event.preventDefault();
+
+        let password =
+            document.getElementById("password").value;
+
+        let confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        alert("Registration Successful! Welcome Student.");
+
+    }
+
+    function loginUser(event) {
+
+        event.preventDefault();
+
+        alert("Login form submitted!");
+
+    }
+
+</script>
+
+</body>
+</html>
+
